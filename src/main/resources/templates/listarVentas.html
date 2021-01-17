@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Ventas</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">Inicio</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" th:href="@{/vender/}">Vender</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/producto/listar}">Productos</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/ventas/}">Ventas</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<br>
+	<div class="text-center">
+		<h2 >Lista de las ventas realizadas</h2>
+		<a class="btn btn-success mb-2" th:href="@{/vender/}">Realizar Venta</a>
+	</div>
+	<div class="col-8 offset-2">
+		<div class="table-responsive">
+			<table class="table table-striped text-center">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Total</th>
+						<th>Productos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="venta : ${ventas}">
+						<td th:text="${venta.fechaYHora}"></td>
+						<td th:text="${venta.total}"></td>
+						<td>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Nombre</th>
+										<th>Codigo de barras</th>
+										<th>Cantidad vendida</th>
+										<th>Precio</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="producto : ${venta.productos}">
+										<td th:text="${producto.nombre}"></td>
+										<td th:text="${producto.codigo}"></td>
+										<td th:text="${producto.cantidad}"></td>
+										<td th:text="${producto.precio}"></td>
+										<td th:text="${producto.total}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
